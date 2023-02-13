@@ -5,6 +5,7 @@
  */
 #include <stddef.h>
 #include <xen_dom_mgmt.h>
+#include <xrun.h>
 
 /* TODO: call xen library initialization routine */
 extern void init_root();
@@ -16,4 +17,5 @@ void main(void)
 
 	init_root();
 	domu_create(NULL, 3, argv);
+	xrun_run("/", 0, "test");
 }
