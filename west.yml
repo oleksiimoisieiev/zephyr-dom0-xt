@@ -8,8 +8,8 @@ manifest:
   remotes:
     - name: xen-troops
       url-base: https://github.com/xen-troops/
-    - name: lorc
-      url-base: https://github.com/lorc/
+    - name: amoi
+      url-base: https://github.com/oleksiimoisieiev/
     - name: zephyr
       url-base: https://github.com/zephyrproject-rtos
 
@@ -19,8 +19,8 @@ manifest:
       revision: aos-wip
       west-commands: scripts/west-commands.yml
     - name: zephyr-xenlib
-      remote: lorc
-      revision: initial
+      remote: amoi
+      revision: xrun
     - name: littlefs
       remote: zephyr
       path: modules/fs/littlefs
