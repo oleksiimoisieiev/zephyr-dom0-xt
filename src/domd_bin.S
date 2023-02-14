@@ -13,3 +13,13 @@
 
 /* DomD dtb from include/ dir */
 .incbin		"domd.dtb"
+
+.section .img_unikraft,"a"
+
+/* unikraft binary with pvcalls */
+.incbin 	"pvcalls_xen-arm64"
+
+.section .dtb_unikraft,"a"
+
+/* dtb file for the unikraft domains */
+.incbin		"unikernel.dtb"

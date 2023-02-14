@@ -10,6 +10,8 @@ manifest:
       url-base: https://github.com/firscity/
     - name: lorc
       url-base: https://github.com/lorc/
+    - name: zephyr
+      url-base: https://github.com/zephyrproject-rtos
 
   projects:
     - name: zephyr
@@ -19,3 +21,9 @@ manifest:
     - name: zephyr-xenlib
       remote: lorc
       revision: initial
+    - name: littlefs
+      remote: zephyr
+      path: modules/fs/littlefs
+      groups:
+        - fs
+      revision: 9e4498d1c73009acd84bb36036ee5e2869112a6c
