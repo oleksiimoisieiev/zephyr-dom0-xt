@@ -6,8 +6,8 @@ manifest:
     path: zephyr-dom0-xt
 
   remotes:
-    - name: firscity
-      url-base: https://github.com/firscity/
+    - name: xen-troops
+      url-base: https://github.com/xen-troops/
     - name: lorc
       url-base: https://github.com/lorc/
     - name: zephyr
@@ -15,8 +15,8 @@ manifest:
 
   projects:
     - name: zephyr
-      remote: firscity
-      revision: zephyr_aos_porting
+      remote: xen-troops
+      revision: aos-wip
       west-commands: scripts/west-commands.yml
     - name: zephyr-xenlib
       remote: lorc
