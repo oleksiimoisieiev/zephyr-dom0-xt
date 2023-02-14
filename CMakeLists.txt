@@ -15,3 +15,21 @@ include_directories(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/prebuilt)
 
 target_sources(app PRIVATE src/dom0.c src/domd_cfg.c src/domd_bin.S)
+
+include(ExternalProject)
+set(XEN_SRCDIR ${CMAKE_CURRENT_SOURCE_DIR}/../xen)
+set(XEN_BINDIR ${CMAKE_CURRENT_BINARY_DIR}/hyp)
+
+ExternalProject_Add(
+  hypervisor
+  PREFIX ${XEN_BINDIR}
+  SOURCE_DIR ${XEN_SRCDIR}/xen
+  BINARY_DIR ${XEN_BINDIR}
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND ${MAKE} make -C ${XEN_SRCDIR}/xen O=${XEN_BINDIR}
+  CONFIG_QEMU_XEN=y CONFIG_DEBUG=y XSM_ENABLE=y
+  XEN_TARGET_ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- HOSTCC=gcc
+  INSTALL_COMMAND cp ${XEN_BINDIR}/xen ${ZEPHYR_BINARY_DIR}/xen
+  )
+
+add_dependencies(app hypervisor)
