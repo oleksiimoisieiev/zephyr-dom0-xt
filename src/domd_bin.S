@@ -17,7 +17,7 @@
 .section .img_unikraft,"a"
 
 /* unikraft binary with pvcalls */
-.incbin 	"pvcalls_xen-arm64"
+.incbin 	"helloworld_xen-arm64"
 
 .section .dtb_unikraft,"a"
 
