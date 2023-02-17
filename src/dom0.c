@@ -13,5 +13,5 @@ extern void init_root();
 void main(void)
 {
 	init_root();
-	xrun_run("/", 0, "test");
+	/* xrun_run("/", 0, "test"); */
 }
