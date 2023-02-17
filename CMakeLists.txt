@@ -12,8 +12,7 @@ if (DTC)
   add_custom_target(
     fix_dtb
     DEPENDS ${ZEPHYR_FINAL_EXECUTABLE}
-    COMMAND ${UTILS_SCRIPTS_DIR}/fix_dtb.sh ${UTILS_SCRIPTS_DIR}/gicv${QEMU_GIC_VERSION}.tmpl ${ZEPHYR_BINARY_DIR}/virt_gicv${QEMU_GIC_VERSION}.dtb ${ZEPHYR_BINARY_DIR}/zephyr.bin
-  )
+    COMMAND ${UTILS_SCRIPTS_DIR}/fix_dtb.sh ${UTILS_SCRIPTS_DIR}/gicv2.tmpl ${ZEPHYR_BINARY_DIR}/virt_gicv2.dtb ${ZEPHYR_BINARY_DIR}/zephyr.bin)
 else()
   message(WARNING "No dtc program")
 endif()
