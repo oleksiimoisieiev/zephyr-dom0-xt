@@ -379,12 +379,17 @@ extern char __img_domd_end[];
 extern char __dtb_domd_start[];
 extern char __dtb_domd_end[];
 
+extern char __img_unikraft_start[];
+extern char __img_unikraft_end[];
+extern char __dtb_unikraft_start[];
+extern char __dtb_unikraft_end[];
+
 struct xen_domain_cfg domd_cfg = {
-	.mem_kb = 2097152,
+	.mem_kb = 4096,
 
 	.flags = (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap),
 	.max_evtchns = 10,
-	.max_vcpus = 4,
+	.max_vcpus = 1,
 	.gnt_frames = 32,
 	.max_maptrack_frames = 1,
 
@@ -394,16 +399,15 @@ struct xen_domain_cfg domd_cfg = {
 	.irqs = domd_irqs,
 	.nr_irqs = 0 /* sizeof(domd_irqs) / sizeof(*domd_irqs) */,
 
-	.gic_version = XEN_DOMCTL_CONFIG_GIC_V2,
+	.gic_version = XEN_DOMCTL_CONFIG_GIC_V3,
 	.tee_type = XEN_DOMCTL_CONFIG_TEE_NONE,
 
 	.dtdevs = domd_dtdevs,
 	.nr_dtdevs = 0 /* sizeof(domd_dtdevs) / sizeof(char *) */,
 
-	.img_start = __img_domd_start,
-	.img_end = __img_domd_end,
+	.img_start = __img_unikraft_start,
+	.img_end = __img_unikraft_end,
 
-	.dtb_start = __img_domd_start,
-	.dtb_end = __img_domd_end,
-
+	.dtb_start = __dtb_unikraft_start,
+	.dtb_end = __dtb_unikraft_end,
 };
