@@ -26,4 +26,4 @@ manifest:
       path: modules/fs/littlefs
       groups:
         - fs
-      revision: 9e4498d1c73009acd84bb36036ee5e2869112a6c
+      revision: ca583fd297ceb48bced3c2548600dc615d67af24
