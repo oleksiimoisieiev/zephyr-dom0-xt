@@ -23,6 +23,7 @@ GDATA(__dtb_domd_start)
 GDATA(__dtb_domd_end)
 
 __dtb_domd_start:
+.align 8
 .incbin		"domd.dtb"
 __dtb_domd_end:
 
@@ -39,7 +40,7 @@ __img_unikraft_end:
 
 GDATA(__dtb_unikraft_start)
 GDATA(__dtb_unikraft_end)
-
 __dtb_unikraft_start:
+.align 8
 .incbin "unikernel.dtb"
 __dtb_unikraft_end:
