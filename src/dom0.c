@@ -42,8 +42,8 @@ void main(void)
 
 	init_root();
 	/* xrun_run("/", 0, "test"); */
-
-	ret = debug_write_file("/lfs", "config.json", json_msg, sizeof(json_msg));
+	printk("dtb = %p\n", (void* )__dtb_unikraft_start);
+	ret = debug_write_file("/lfs", "config.json", json_msg, sizeof(json_msg)); /*  */
 	printk("Write config.json file ret = %d\n", ret);
 	ret = debug_write_file("/lfs", "unikernel.bin",
 						__img_unikraft_start,
