@@ -5,6 +5,7 @@
  */
 
 #include <domain.h>
+#include <string.h>
 #include <zephyr/xen/public/domctl.h>
 
 static char *domd_dtdevs[] = {
@@ -379,6 +380,19 @@ extern char __img_domd_end[];
 extern char __dtb_domd_start[];
 extern char __dtb_domd_end[];
 
+static int load_image_bytes(uint8_t *buf, size_t bufsize,
+			    uint64_t image_load_offset, void *image_info)
+{
+	memcpy(buf, __img_domd_start + image_load_offset, bufsize);
+	return 0;
+}
+
+static ssize_t get_image_size(void *image_info, uint64_t *size)
+{
+	*size = __img_domd_end - __img_domd_start;
+	return 0;
+}
+
 struct xen_domain_cfg domd_cfg = {
 	.mem_kb = 16384,
 
@@ -400,8 +414,9 @@ struct xen_domain_cfg domd_cfg = {
 	.dtdevs = domd_dtdevs,
 	.nr_dtdevs = 0,
 
-	.img_start = __img_domd_start,
-	.img_end = __img_domd_end,
+	.load_image_bytes = load_image_bytes,
+	.get_image_size = get_image_size,
+	.image_info = NULL,
 
 	.dtb_start = __dtb_domd_start,
 	.dtb_end = __dtb_domd_end,
