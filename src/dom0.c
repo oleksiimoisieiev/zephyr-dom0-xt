@@ -23,8 +23,11 @@ uint8_t json_msg[] = "{"
 			"\"parameters\": [\"pvcalls=true\"] "
 		"}, "
 		"\"kernel\": { "
-			" \"path\" : \"/lfs/unikernel.bin\", "
-			" \"parameters\" : [ \"port=8124\", \"hello world\" ]"
+			"\"path\" : \"unikernel.bin\", "
+			"\"parameters\" : [ \"port=8124\", \"hello world\" ]"
+		"}, "
+		"\"hwconfig\": { "
+			"\"devicetree\": \"uni.dtb\" "
 		"} "
 	"} "
 "}";
@@ -42,18 +45,20 @@ void main(void)
 
 	init_root();
 	/* xrun_run("/", 0, "test"); */
+#ifdef DEBUG
 	printk("dtb = %p\n", (void* )__dtb_unikraft_start);
-	ret = debug_write_file("/lfs", "config.json", json_msg, sizeof(json_msg)); /*  */
+	ret = write_file("/lfs", "config.json", json_msg, sizeof(json_msg));
 	printk("Write config.json file ret = %d\n", ret);
-	ret = debug_write_file("/lfs", "unikernel.bin",
+	ret = write_file("/lfs", "unikernel.bin",
 						__img_unikraft_start,
 						__img_unikraft_end - __img_unikraft_start);
 	printk("Write unikraft.bim file ret = %d\n", ret);
-	ret = debug_write_file("/lfs", "uni.dtb",
+	ret = write_file("/lfs", "uni.dtb",
 						   __dtb_unikraft_start,
 						   __dtb_unikraft_end - __dtb_unikraft_start);
 	printk("Write unikraft.dtb file ret = %d\n", ret);
 
 	ret = lsdir("/lfs");
 	printk("lsdir result = %d\n", ret);
+#endif /* DEBUG */
 }
