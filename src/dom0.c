@@ -36,7 +36,13 @@ struct xen_domain_cfg *domain_get_user_cfg(int index)
 
 int main(void)
 {
+	int ret;
 	int i = 0;
+
+	ret = storage_init();
+	if (ret) {
+		goto exit_err;
+	}
 
 	/* init domains cfg */
 	while (domain_cfgs[i].domain_cfg) {
