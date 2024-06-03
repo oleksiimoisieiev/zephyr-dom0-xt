@@ -63,6 +63,13 @@ config DOM_STORAGE_FATFS_LOGICAL_DRIVE_NAME
 	help
 	  FATFS logical drive name to be used as mount point.
 
+config DOM_CFG_LINUX_PV_DOMAIN
+	bool "Enable PV domain support loaded from FATFS storage"
+	help
+	  Adds Linux-based domain with enabled pvnet and pvblock devices.
+	  It is expected to be placed on the storage device, connected to
+	  Dom0.
+
 endif #DOM_STORAGE_FATFS_ENABLE
 
 config DOM_CFG_BUILTIN_IMAGES
