@@ -50,6 +50,9 @@ int main(void)
 	 * back from xenlib.
 	 */
 	while (domain_cfgs[i].domain_cfg) {
+		if (domain_cfgs[i].init) {
+			domain_cfgs[i].init();
+		}
 		domain_cfgs[i].domain_cfg->image_info = &domain_cfgs[i];
 		i++;
 	}

@@ -15,6 +15,13 @@
 struct dom0_domain_cfg {
 	struct xen_domain_cfg *domain_cfg; /**< xenlib domain cfg */
 
+	/**
+	 * @brief Dom0 configuration init callback.
+	 *
+	 * Callback that allows to execute some init routine before starting
+	 * domain. Such routine can be parsing pv parameters.
+	 */
+	void (*init)(void);
 	const char *image_kernel_path; /**< disk: domain kernel binary path */
 	const char *image_dt_path; /**< disk: domain partial device-tree (PDT) binary path */
 };
