@@ -392,3 +392,59 @@ Attach to DomU console with ``xu console``, use ``Ctrl-']'`` to exit console:
     thread_a: Hello World from cpu 0 on xenvm!
     thread_b: Hello World from cpu 0 on xenvm!
     thread_a: Hello World from cpu 0 on xenvm!
+
+Linux pv domain control
+=======================
+
+Create linux-pv-domu by using ``xu create`` with linux_pv_domu configuration and Xen
+domainId ``-d 3``.
+
+.. code-block:: console
+
+    uart:~$ xu create linux_pv_domu -d 3
+    W: Domain device tree generation is not supported
+    I: rambase = 40000000, ramsize = 16777216
+    I: kernbase = 40000000 kernsize = 364548, dtbsize = 11058
+    I: kernsize_aligned = 2097152
+    I: DTB will be placed on addr = 0x40e00000
+    I: Created domain is paused
+    ...
+
+Attach to DomU console with ``xu console``, use ``Ctrl-']'`` to exit console:
+
+.. code-block:: console
+
+    uart:~$ xu console 3
+    Attached to a domain console
+    CPU 0
+    [    0.001728] RCU Tasks: Setting shift to 1 and lim to 1 rcu_task_cb_adjust=1.
+    [    0.001788] RCU Tasks Rude: Setting shift to 1 and lim to 1 rcu_task_cb_adjust=1.
+    [    0.001832] RCU Tasks Trace: Setting shift to 1 and lim to 1 rcu_task_cb_adjust=1.
+    ...
+    [    0.514939] Freeing unused kernel memory: 8320K
+    [    0.515149] Run /init as init process
+    sh: write error: Invalid argument
+    /bin/sh: can't access tty; job control turned off
+    ~ #
+
+Check PV block connection to the Domain:
+
+.. code-block:: console
+    ~ # ls -la /dev/xvda
+
+Check PV net connection to the Domain:
+
+.. code-block:: console
+    ~ # ip addr add dev eth0 192.168.0.2/24
+    ~ # ip link set eth0 up
+    ~ # ping -c 3 192.168.0.1
+
+.. note::
+   -c 3 parameter for ping is needed because Ctrl+C is not working.
+
+Also, linux-pv-domu can be accessed from DomD. For this please switch to DomD
+and execute the following command:
+
+.. code-block:: console
+    ~ # ping -c 3 192.168.0.2
+
