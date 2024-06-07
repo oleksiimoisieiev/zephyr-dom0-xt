@@ -14,11 +14,11 @@ manifest:
   projects:
     - name: zephyr
       remote: xentroops
-      revision: rpi5_dev
+      revision: cb85dfaa509980dfc0730dba7d8dbc99b283a848
       west-commands: scripts/west-commands.yml
     - name: zephyr-xenlib
       remote: xentroops
-      revision: main
+      revision: 72dbdad3d141bd8fed2688597453a516b70157f6
     - name: fatfs
       remote: zephyrproject-rtos
       revision: master
